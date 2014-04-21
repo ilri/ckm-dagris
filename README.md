@@ -7,7 +7,7 @@ The working objectives of DAGRIS are:
 * Maintain the integrity and validity of the information, and
 * Disseminate the information in a readily accessible way to all key stakeholders.
 
-DAGRIS has previously been developed as a classic ASP web application with a Microsoft SQL 2000 database back-end. The lack of proper documentation for this custom system was has made its maintenance and/or enhancement very difficult. For this reason, the CIGAR IT/Knowledge Management team has proposed to port the entire system (DAGRIS) to [Drupal](http://drupal.org), a popular opensource Content Management System (CMS) with a very high rate of adoption within different institutions for its modularity and scalability.
+DAGRIS has previously been developed as a classic ASP web application with a Microsoft SQL 2000 database back-end. The lack of proper documentation for this custom system has made its maintenance and/or enhancement very difficult. For this reason, the CIGAR IT/Knowledge Management team has proposed to port the entire system (DAGRIS) to [Drupal](http://drupal.org), a popular opensource Content Management System (CMS) with a very high rate of adoption within different institutions for its modularity and scalability.
 
 # Environment Setup
 
