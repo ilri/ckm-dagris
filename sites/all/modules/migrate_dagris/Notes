@@ -1,0 +1,4 @@
+1. Change table trait_type_sex to sex_group
+2. Use the Tagris external database for migration source
+3. Include the transformation php code
+4.
