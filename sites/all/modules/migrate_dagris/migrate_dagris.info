@@ -1,0 +1,43 @@
+name = "Migrate DAGRIS"
+description = "Module to migrate DAGRIS data"
+package = "DAGRIS"
+
+dependencies[] = "migrate"
+
+files[] = "migrate_dagris.module"
+files[] = "migrate_dagris.migrate.inc"
+
+
+;content type migrations
+
+files[] = "bibliography.inc"
+files[] = "breed.inc"
+files[] = "breed_country.inc"
+files[] = "breed_image.inc"
+files[] = "breed_web_link.inc"
+files[] = "contact.inc"
+files[] = "population.inc"
+files[] = "study_location.inc"
+files[] = "trait.inc"
+files[] = "trait_age.inc"
+files[] = "trait_identifier.inc"
+files[] = "trait_quantitative_value.inc"
+files[] = "trait_type.inc"
+
+;Taxonomy Terms migrations
+
+files[] = "breed_group.inc"
+files[] = "country.inc"
+files[] = "document_type.inc"
+files[] = "management_condition.inc"
+files[] = "region.inc"
+files[] = "risk_status.inc"
+files[] = "sex_group.inc"
+files[] = "sex.inc"
+files[] = "species.inc"
+files[] = "trait_category.inc"
+files[] = "trait_value_type.inc"
+
+
+
+core = 7.x
