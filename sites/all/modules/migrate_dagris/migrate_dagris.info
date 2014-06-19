@@ -38,6 +38,4 @@ files[] = "species.inc"
 files[] = "trait_category.inc"
 files[] = "trait_value_type.inc"
 
-
-
 core = 7.x
