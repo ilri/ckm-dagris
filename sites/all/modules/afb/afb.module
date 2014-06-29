@@ -313,7 +313,7 @@ function afb_form_alter(&$form, &$form_state, $form_id) {
     $form['#id'] = !empty($form['#node']->form_id) ? $form['#node']->form_id : $form['#id'];
     $form['ajax-submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Save Node'),
+      '#value' => t('Save ' . ucwords(str_replace("_"," ",$type))),
       '#weight' => 50,
       '#id' => 'ajax-submit-random-' . $rand,
       '#ajax' => array(

@@ -15,7 +15,11 @@ Drupal.behaviors.twitter_bootstrap_modal_block = {
     // This triggers block as modal.
     $(TBBtrigger).once('TBB', function () {
       var title = $(this).children('h2').text();
-      $(this).after('<section id="btn-' + $(this).attr('id') + '" class="sideral-corner after"><button class="btn ' + link_type + ' btn-lg" data-target="#' + $(this).attr('id') + '" data-toggle="modal">' + title + '</button></section>');
+      if($("#children-forms").length){
+        $("#children-forms ul").append('<li class="list-group-item"><a class="' + link_type + '" data-target="#' + $(this).attr('id') + '" data-toggle="modal">' + title + '</a></li>');
+      } else {
+        $(this).after('<section id="children-forms" ><ul class="list-group"><li class="list-group-item"><a class="' + link_type + '" data-target="#' + $(this).attr('id') + '" data-toggle="modal">' + title + '</a></li></ul></section>');
+      }
       $(this).addClass("modal fade");
       $(this).attr("tabindex", "-1");
       $(this).attr("role", "dialog");
