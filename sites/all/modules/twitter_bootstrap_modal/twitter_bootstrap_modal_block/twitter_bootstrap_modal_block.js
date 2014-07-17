@@ -26,7 +26,7 @@ Drupal.behaviors.twitter_bootstrap_modal_block = {
       $(this).attr("aria-hidden", "true");
       $(this).children('h2').wrap('<div class="modal-header" />');
       $(this).children('.modal-header').prepend('<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>');
-      $(this).children('.node-form').wrapAll('<div class="modal-header" />');
+      $(this).children('.node-form').wrapAll('<div class="modal-body" />');
       //$(this).children('.block-content').addClass('modal-body');
       $(this).append('<div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">' + Drupal.t('Close') + '</button></div>');
       $(this).children('div').wrapAll('<div class="modal-content" />');
