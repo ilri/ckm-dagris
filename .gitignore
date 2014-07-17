@@ -5,5 +5,4 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 
-# Ignore uncompressed DB script file
 _db/dagris_db.sql
