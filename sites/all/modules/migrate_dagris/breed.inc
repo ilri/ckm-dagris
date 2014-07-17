@@ -21,6 +21,7 @@ class BreedMigration extends DagrisMigration {
             ->select('mi_node_breeds', 'br')
             ->fields('br', array(
                 'id',
+                'species_id',
                 'group_id',
                 'name_strain',
                 'name_synonym',
@@ -42,6 +43,8 @@ class BreedMigration extends DagrisMigration {
             ), MigrateDestinationNode::getKeySchema()
         );
         $this->addFieldMapping('title', 'name_strain');
+        $this->addFieldMapping('field_ref_bg_species', 'species_id')
+            ->sourceMigration('Species');
         $this->addFieldMapping('field_ref_br_group', 'group_id')
             ->sourceMigration('BreedGroup');
         $this->addFieldMapping('field_synonyms', 'name_synonym');
