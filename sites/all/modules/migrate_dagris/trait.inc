@@ -37,8 +37,7 @@ class TraitMigration extends DagrisMigration {
                 'size',
                 'comment',
                 'management',
-                'location',
-                'published'
+                'location'
             ));
 
         $this->source = new MigrateSourceSQL($query);
@@ -75,7 +74,6 @@ class TraitMigration extends DagrisMigration {
         $this->addFieldMapping('field_tr_comment', 'comment');
         $this->addFieldMapping('field_tr_management', 'management');
         $this->addFieldMapping('field_tr_location', 'location');
-        $this->addFieldMapping('field_tr_published', 'published');
     }
 
     /**
