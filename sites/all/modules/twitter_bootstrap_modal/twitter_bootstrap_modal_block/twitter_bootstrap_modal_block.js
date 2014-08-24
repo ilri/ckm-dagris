@@ -31,6 +31,12 @@ Drupal.behaviors.twitter_bootstrap_modal_block = {
       $(this).append('<div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">' + Drupal.t('Close') + '</button></div>');
       $(this).children('div').wrapAll('<div class="modal-content" />');
       $(this).children('.modal-content').wrap('<div class="modal-dialog" />');
+      // Fix to show Google map correctly
+      $(this).on('shown.bs.modal', function(e){
+        if(document.querySelector("[id^=geolocation-map]")){
+          google.maps.event.trigger(document.querySelector("[id^=geolocation-map]"), 'resize');
+        }
+      });
       $(this).appendTo('body');
     });
   }
