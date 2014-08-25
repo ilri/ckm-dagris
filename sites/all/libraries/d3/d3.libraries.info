@@ -1,0 +1,4 @@
+name = d3
+description = "D3 example Bar Chart library"
+files[js][] = d3.min.js
+version = 3.1
