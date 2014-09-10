@@ -12,7 +12,7 @@ function bootstrap_menu_local_tasks(&$variables) {
 
   if (!empty($variables['primary'])) {
     $variables['primary']['#prefix'] = '<h2 class="element-invisible">' . t('Primary tabs') . '</h2>';
-    $variables['primary']['#prefix'] .= '<ul class="tabs--primary nav nav-tabs">';
+    $variables['primary']['#prefix'] .= '<ul class="tabs--primary nav nav-pills">';
     $variables['primary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['primary']);
   }
