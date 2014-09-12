@@ -1,6 +1,7 @@
 name = 'dagris'
 files[js][] = 'main.js'
 files[js][] = 'data.json'
-files[css][] = 'style.js'
+files[css][] = 'style.css'
 version = 1
 dependencies[] = d3
+views = 3
