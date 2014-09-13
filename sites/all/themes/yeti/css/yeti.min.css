@@ -18,3 +18,12 @@
 .views-exposed-form .btn.form-submit {
   padding: 6px 28px;
 }
+.stripped-content>div{
+  padding: 10px 0;
+}
+.stripped-content>div:nth-child(2n+2){
+  background-color: rgba(200, 200, 200, 0.2);
+}
+.stripped-content>div .label-inline{
+  font-weight: bold;
+}
