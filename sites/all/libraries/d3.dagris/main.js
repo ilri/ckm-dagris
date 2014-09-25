@@ -2,7 +2,8 @@
   Drupal.d3.dagris = function (select, settings) {
   var data =  settings.rows;
   var labels = data.map(function(d) { return String(d[1]); });
-  var values = data.map(function(d){ return d[0]; });
+  var label_values = data.map(function(d){ return d[0]; });
+  var values = data.map(function(d){ return d[0].replace(/,/g, ""); });
   var margin = {"top": 50, "right": 10, "bottom": 30, "left": 50}, width = 400, height = 300;
 
   var width = 848,
@@ -40,7 +41,7 @@
   .attr("data-title", function(d, i) {return labels[i] + " - " + (((values[i]/d3.sum(values))*100).toFixed(2)) + "%"; })
   .style("fill", function(d, i) { return color(i); })
   .append("title")
-   .text(function(d, i) { return labels[i] + " - " + values[i]; });
+   .text(function(d, i) { return labels[i] + " - " + label_values[i]; });
 
   var legend = d3.select("#" + svg_container_id + " svg").append("g")
   .attr("class", "legend")
@@ -60,7 +61,7 @@
   .attr("x", 24)
   .attr("y", 9)
   .attr("dy", ".35em")
-  .text(function(d, i) { return labels[i] + " - " + values[i]; });
+  .text(function(d, i) { return labels[i] + " - " + label_values[i]; });
 
   d3.select("#" + svg_container_id + " svg#question-piechart")
   .append("g")

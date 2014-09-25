@@ -1,4 +1,14 @@
-@import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");/*!
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-Light-webfont.eot');
+    src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/*!
  * Bootswatch v3.2.0
  * Homepage: http://bootswatch.com
  * Copyright 2012-2014 Thomas Park
@@ -10,13 +20,14 @@
 .navbar-form .input-group-addon {
   width: auto;
 }
-
 .navbar-form  #block-search-form {
   margin: 0 0 0 0;
 }
-
 .views-exposed-form .btn.form-submit {
   padding: 6px 28px;
+}
+.views-exposed-form .views-exposed-widget .btn{
+  margin-top: 1.6em;
 }
 .stripped-content>div{
   padding: 10px 0;
@@ -26,4 +37,7 @@
 }
 .stripped-content>div .label-inline{
   font-weight: bold;
+}
+#search-form{
+  margin-top: 20px;
 }
