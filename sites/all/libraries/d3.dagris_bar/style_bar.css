@@ -4,7 +4,7 @@ svg rect {
 
 svg text {
   fill: white;
-  font: 14px sans-serif;
+  font: 18px;
   text-anchor: end;
   padding-right: 5px;
 }
