@@ -64,3 +64,84 @@ section.parallax{
 .find-out-more .btn.btn-lg{
   font-size: 30px;
 }
+
+/********* Section 2 *********/
+#slide-2 div.entities a{
+  display: block;
+  background-color: rgba(0,0,0,0.5);
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #444;
+  text-shadow: none;
+  font-size: 2em;
+  text-decoration: none;
+}
+#slide-2 div.entities a.active{
+  background-color: rgba(255,255,255,0.8);
+  padding: 30px;
+  margin-bottom: 20px;
+  color: #712d3d;
+  text-shadow: none;
+}
+#slide-2 div.details div{
+  display: none;
+  background-color: rgba(0,0,0,0.5);
+  color: #fafafa;
+  padding: 20px 30px;
+  text-align: justify;
+}
+#slide-2 div.details div h2{
+  color: #fff;
+  margin-top: 0px;
+}
+#slide-2 div.details div a{
+  background-color: #fff;
+  padding: 2px 5px;
+}
+#slide-2 div.details div.active{
+  display: block;
+}
+#slide-2 #species-list{
+  list-style: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 20px;
+}
+#slide-2 #species-list li{
+  display: block;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#slide-4 div.row {
+  text-align: justify;
+}
+
+#slide-4 div.row a {
+  display: block;
+  text-align: center;
+  padding: 20px 10px;
+}
+
+#slide-4 div.row a.circle-thumbnail img{
+  border-radius: 180px;
+  width: 180px;
+  height: 180px;
+}
+
+#slide-4 div.row a.circle-thumbnail h3{
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+#slide-4 div.row a.circle-thumbnail p{
+  text-align: justify;
+  color: #fff;
+  padding: 20px 30px;
+}
+
+#slide-4 div.row a.circle-thumbnail:hover{
+  color: #aaa;
+  background-color: rgba(0,0,0,0.7);
+  text-decoration: none;
+}

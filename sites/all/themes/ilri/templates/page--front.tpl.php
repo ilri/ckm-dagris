@@ -137,11 +137,110 @@
   data-center="background-position: 50% 0px;"
   data-top-bottom="background-position: 50% -100px;"
   data-anchor-target="#slide-2">
-  <div class="hsContainer">
-    <div class="hsContent"
-    data-center="opacity: 1"
-    data-106-top="opacity: 0">
+  <div class="hsContainer"
+       data-center="background-color:rgba(0,0,0,0.6)"
+       data-bottom-top="background-color:rgba(0,0,0,0.0)">
+    <div class="hsContent">
     <?php print render($page['parallax_section_2']); ?>
+    <div class="row">
+      <div class="col-md-4 main entities"
+           data-bottom-top="left: -600px;"
+           data-top="left: 0px;"
+           data--200-top="left: 0px;"
+           data-200-bottom="left: 0px;"
+           data-top-bottom="left: -600px;"
+           data-anchor-target="#slide-2"
+      >
+        <a id="species" href="#" class="active" data-show="#species-detail">
+          Species
+        </a>
+        <a id="breeds" href="#" data-show="#breeds-detail">
+          Breeds
+        </a>
+        <a id="breed-countries" href="#" data-show="#countries-detail">
+            Countries
+        </a>
+        <a id="breed-images" href="#" data-show="#images-detail">
+          Images
+        </a>
+        <a id="breed-web-links" href="#" data-show="#web-links-detail">
+          Web Links
+        </a>
+        <a id="breed-triats" href="#" data-show="#traits-detail">
+          Traits
+        </a>
+      </div>
+      <div class="col-md-8 details"
+           data-bottom-top="left: 600px;"
+           data-top="left: 0px;"
+           data--200-top="left: 0px;"
+           data-200-bottom="left: 0px;"
+           data-top-bottom="left: 600px;"
+           data-anchor-target="#slide-2">
+        <div id="species-detail" href="#" class="active">
+          <h2>Species</h2>
+          <p>
+            General categories of domestic animals in <em>DAGRIS</em>. There are 8 such categories: Buffalo,
+Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
+          </p>
+          <ul id="species-list" class='clearfix'>
+            <li><img src="sites/all/themes/ilri/images/species_buffalo.png" alt="Buffalo"/></li>
+            <li><img src="sites/all/themes/ilri/images/species_cattle.png" alt="Cattle"/></li>
+            <li><img src="sites/all/themes/ilri/images/species_chicken.png" alt="Chicken"/></li>
+            <li><img src="sites/all/themes/ilri/images/species_dormedary_camels.png" alt="Dormedary Camels"/></li>
+            <li><img src="sites/all/themes/ilri/images/species_goats.png" alt="Goats"/></li>
+            <li><img src="sites/all/themes/ilri/images/species_pigs.png" alt="Pigs"/></li>
+            <li><img src="sites/all/themes/ilri/images/species_sheep.png" alt="Sheep"/></li>
+            <li><img src="sites/all/themes/ilri/images/species_yaks.png" alt="Yaks"/></li>
+          </ul>
+        </div>
+        <div id="breeds-detail">
+          <h2>Breeds</h2>
+          <p>
+            The main focus of the DAGRIS system. A Breed describes an animal of a particular species, found in a specific country; exhibiting defined traits.
+          </p>
+        </div>
+        <div id="countries-detail">
+          <h2>Countries</h2>
+          <p>
+            The countries in which breeds are found. The are specfically 17 countries in Africa which are the focus of the DAGRIS project.
+          </p>
+          <p class="text-center">
+            <img src="sites/all/themes/ilri/images/kafaci_members.png" alt="KAFACI Members"/>
+          </p>
+        </div>
+        <div id="images-detail">
+          <h2>Images</h2>
+          <p>
+            Image data of breeds managed using third party image hosting service, <a href="https://www.flickr.com/photos/ilri-dagris/">Flickr</a>.
+          </p>
+          <p class="text-center">
+            <img src="sites/all/themes/ilri/images/flickr_dagris.png" alt="Flickr DAGRIS"/>
+          </p>
+        </div>
+        <div id="web-links-detail">
+          <h2>Web Links</h2>
+          <p>
+            External sources of information about a particular breed.
+          </p>
+          <p class="text-center">
+            <img src="sites/all/themes/ilri/images/web_link_form.png" alt="Flickr DAGRIS"/>
+          </p>
+        </div>
+        <div id="traits-detail">
+          <h2>Traits</h2>
+          <p>
+            Characteristics of a given breed. Traits are mainly categorized into four groups:
+          </p>
+          <ul>
+            <li>Genetic</li>
+            <li>Physical</li>
+            <li>Production</li>
+            <li>Reproduction</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </div>
@@ -152,10 +251,14 @@
   data-center="background-position: 50% 0px;"
   data-top-bottom="background-position: 50% -100px;"
   data-anchor-target="#slide-3">
-  <div class="hsContainer">
+  <div class="hsContainer"
+       data-center="background-color:rgba(0,0,0,0.6)"
+       data-bottom-top="background-color:rgba(0,0,0,0.0)">
     <div class="hsContent"
-    data-center="opacity: 1"
-    data-106-top="opacity: 0">
+    data-top-top="opacity: 1"
+    data-top-bottom="opacity: 0"
+    data-bottom-top="opacity: 0"
+    data-anchor-target="#slide-3">
     <?php print render($page['parallax_section_3']); ?>
   </div>
 </div>
@@ -166,10 +269,48 @@
   <div class="bcg"
   data-center="background-position: 50% 0px;"
   data-anchor-target="#slide-4">
-  <div class="hsContainer">
-    <div class="hsContent"
-    data-center="opacity: 1"
-    data-106-top="opacity: 0">
+  <div class="hsContainer"
+       data-center="background-color:rgba(0,0,0,0.6)"
+       data-bottom-top="background-color:rgba(0,0,0,0.0)">
+    <div class="hsContent">
+    <div class="row">
+      <div class="col-md-4"
+           data-bottom-top="left: -600px;"
+           data-top="left: 0px;"
+           data-anchor-target="#slide-4">
+        <a href="https://www.ilri.org/user/312" class="circle-thumbnail" target="_blank">
+          <img src="sites/default/files/placeholder.png" alt="Dr. Okeyo Mwai">
+          <h3>Dr. Okeyo Mwai</h3>
+          <p>
+            Okeyo is a scientist and is the Acting Operating Project Leader on “Improving Utilization of Farm Animal Genetic Resources (Improving breeding strategies)” research projects at ILRI (International Livestock research Institute). Currently he is leading and contributing to several specific research projects.
+          </p>
+        </a>
+      </div>
+      <div class="col-md-4"
+           data-bottom-top="bottom: -600px;"
+           data-top="bottom: 0px;"
+           data-anchor-target="#slide-4">
+        <a href="https://www.ilri.org/user/415" class="circle-thumbnail" target="_blank">
+          <img src="sites/default/files/placeholder.png" alt="Dr. Tadelle Dessie">
+          <h3>Dr. Tadelle Dessie</h3>
+          <p>
+            Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
+          </p>
+        </a>
+      </div>
+      <div class="col-md-4"
+           data-bottom-top="left: 600px;"
+           data-top="left: 0px;"
+           data-anchor-target="#slide-4">
+        <a href="https://www.ilri.org/user/453" class="circle-thumbnail" target="_blank">
+          <img src="sites/default/files/placeholder.png" alt="Mrs. Yetnayet Mamo">
+          <h3>Yetnayet Mamo</h3>
+          <p>
+            Yetnayet Mamo Bishaw is an employee of the International Livestock Research Institute (ILRI) since September 1995 in Animal Genetic Resources Group (AnGR) first on temporary bases and then since June 2000 on permanent bases as Research Technologist in Addis Ababa, Ethiopia.
+          </p>
+        </a>
+      </div>
+    </div>
     <?php print render($page['parallax_section_4']); ?>
   </div>
 </div>

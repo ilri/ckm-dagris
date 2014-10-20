@@ -1,0 +1,6 @@
+name = 'dagris_bar'
+files[js][] = 'main_bar.js'
+files[css][] = 'style_bar.css'
+version = 1
+dependencies[] = d3
+views = 3
