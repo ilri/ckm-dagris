@@ -12,3 +12,7 @@ body.front.admin-menu.navbar-is-fixed-top {
 header.front-page-header{
   margin-bottom: 0px;
 }
+
+.tabs--primary.nav.nav-pills{
+  margin-bottom: 20px;
+}
