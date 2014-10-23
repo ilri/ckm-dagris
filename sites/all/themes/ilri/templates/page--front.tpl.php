@@ -278,11 +278,11 @@ Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
            data-bottom-top="left: -600px;"
            data-top="left: 0px;"
            data-anchor-target="#slide-4">
-        <a href="https://www.ilri.org/user/312" class="circle-thumbnail" target="_blank">
-          <img src="sites/default/files/placeholder.png" alt="Dr. Okeyo Mwai">
-          <h3>Dr. Okeyo Mwai</h3>
+        <a href="https://ilri.org/users/skemp" class="circle-thumbnail" target="_blank">
+          <img src="sites/default/files/placeholder.png" alt="Prof. Steve Kemp">
+          <h3>Prof. Steve Kemp</h3>
           <p>
-            Okeyo is a scientist and is the Acting Operating Project Leader on “Improving Utilization of Farm Animal Genetic Resources (Improving breeding strategies)” research projects at ILRI (International Livestock research Institute). Currently he is leading and contributing to several specific research projects.
+            Steve Kemp is a molecular geneticist particularly interested in the mechanisms of innate resistance to disease in livestock. He is a visiting scientist at ILRI and Professor of molecular genetics at the University of Liverpool, UK. Professor Kemp’s current research covers host genome diversity and adaptations to biotic and abiotic factors.
           </p>
         </a>
       </div>
@@ -294,7 +294,7 @@ Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
           <img src="sites/default/files/placeholder.png" alt="Dr. Tadelle Dessie">
           <h3>Dr. Tadelle Dessie</h3>
           <p>
-            Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
+            Tadelle Dessie has 20 years of research and development experience in various national and international research and development organizations. He has served as the group leader for Biotechnology Group based in ILRI-Ethiopia and is involved in the areas of knowledge management and capacity building. He is well versed with projects addressing research for development concentrating on understanding and improved utilization of animal resources to contribute for enhanced livelihoods of poor livestock keepers.
           </p>
         </a>
       </div>
