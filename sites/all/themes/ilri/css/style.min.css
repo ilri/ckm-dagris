@@ -94,9 +94,12 @@ section.parallax{
   color: #fff;
   margin-top: 0px;
 }
-#slide-2 div.details div a{
+#slide-2 div.details div p a{
   background-color: #fff;
   padding: 2px 5px;
+}
+#slide-2 div.details div  a.btn.indent{
+  margin-left: 20px;
 }
 #slide-2 div.details div.active{
   display: block;
