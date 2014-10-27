@@ -9,7 +9,7 @@
  * Available variables:
  *
  * General utility variables:
- * - $base_path: The base URL path of the Drupal installation. At the very
+ * - $front_page: The base URL path of the Drupal installation. At the very
  *   least, this will always default to /.
  * - $directory: The directory the template is located in, e.g. modules/system
  *   or themes/bartik.
@@ -18,7 +18,7 @@
  * - $is_admin: TRUE if the user has permission to access administration pages.
  *
  * Site identity:
- * - $front_page: The URL of the front page. Use this instead of $base_path,
+ * - $front_page: The URL of the front page. Use this instead of $front_page,
  *   when linking to the front page. This includes the language domain or
  *   prefix.
  * - $logo: The path to the logo image, as defined in theme configuration.
@@ -193,21 +193,21 @@ Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
             <li><img src="sites/all/themes/ilri/images/species_sheep.png" alt="Sheep"/></li>
             <li><img src="sites/all/themes/ilri/images/species_yaks.png" alt="Yaks"/></li>
           </ul>
+          <a class="btn btn-primary btn-lg indent" href="<?php print $front_page . "species"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
         </div>
         <div id="breeds-detail">
           <h2>Breeds</h2>
           <p>
             The main focus of the DAGRIS system. A Breed describes an animal of a particular species, found in a specific country; exhibiting defined traits.
           </p>
+          <a class="btn btn-primary btn-lg" href="<?php print $front_page . "breeds"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
         </div>
         <div id="countries-detail">
           <h2>Countries</h2>
           <p>
-            The countries in which breeds are found. The are specfically 17 countries in Africa which are the focus of the DAGRIS project.
+            The countries in which breeds are found.
           </p>
-          <p class="text-center">
-            <img src="sites/all/themes/ilri/images/kafaci_members.png" alt="KAFACI Members"/>
-          </p>
+          <a class="btn btn-primary btn-lg" href="<?php print $front_page . "countries"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
         </div>
         <div id="images-detail">
           <h2>Images</h2>
@@ -217,6 +217,7 @@ Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
           <p class="text-center">
             <img src="sites/all/themes/ilri/images/flickr_dagris.png" alt="Flickr DAGRIS"/>
           </p>
+          <a class="btn btn-primary btn-lg" href="<?php print $front_page . "images"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
         </div>
         <div id="web-links-detail">
           <h2>Web Links</h2>
@@ -226,6 +227,7 @@ Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
           <p class="text-center">
             <img src="sites/all/themes/ilri/images/web_link_form.png" alt="Flickr DAGRIS"/>
           </p>
+          <a class="btn btn-primary btn-lg" href="<?php print $front_page . "weblinks"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
         </div>
         <div id="traits-detail">
           <h2>Traits</h2>
@@ -238,6 +240,7 @@ Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
             <li>Production</li>
             <li>Reproduction</li>
           </ul>
+          <a class="btn btn-primary btn-lg indent" href="<?php print $front_page . "traits"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
         </div>
       </div>
     </div>
