@@ -28,6 +28,7 @@ regions[parallax_section_4]     = 'Prallax Section 4'
 ;; Stylesheets
 ;;;;;;;;;;;;;;;;;;;;;
 
+stylesheets[all][] = css/font-awesome.min.css
 stylesheets[all][] = css/style.min.css
 stylesheets[all][] = css/overrides.min.css
 
@@ -37,6 +38,9 @@ stylesheets[all][] = css/overrides.min.css
 ;;;;;;;;;;;;;;;;;;;;;
 
 scripts[] = 'bootstrap/js/bootstrap.min.js'
+scripts[] = 'js/queue.v1.min.js'
+scripts[] = 'js/topojson.v0.min.js'
+scripts[] = 'js/underscore-min.js'
 
 ; Disable BootstrapCDN so the compiled LESS source files can be used.
 settings[bootstrap_cdn] = ''

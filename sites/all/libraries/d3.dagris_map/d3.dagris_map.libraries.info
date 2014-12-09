@@ -1,0 +1,6 @@
+name = 'dagris_map'
+files[js][] = 'main_map.js'
+files[css][] = 'style_map.css'
+version = 1
+dependencies[] = d3
+views = 3

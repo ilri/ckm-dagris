@@ -149,8 +149,7 @@
            data--200-top="left: 0px;"
            data-200-bottom="left: 0px;"
            data-top-bottom="left: -600px;"
-           data-anchor-target="#slide-2"
-      >
+           data-anchor-target="#slide-2">
         <a id="species" href="#" class="active" data-show="#species-detail">
           Species
         </a>
@@ -158,16 +157,7 @@
           Breeds
         </a>
         <a id="breed-countries" href="#" data-show="#countries-detail">
-            Countries
-        </a>
-        <a id="breed-images" href="#" data-show="#images-detail">
-          Images
-        </a>
-        <a id="breed-web-links" href="#" data-show="#web-links-detail">
-          Web Links
-        </a>
-        <a id="breed-triats" href="#" data-show="#traits-detail">
-          Traits
+          Countries
         </a>
       </div>
       <div class="col-md-8 details"
@@ -209,39 +199,6 @@ Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
           </p>
           <a class="btn btn-primary btn-lg" href="<?php print $front_page . "countries"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
         </div>
-        <div id="images-detail">
-          <h2>Images</h2>
-          <p>
-            Image data of breeds managed using third party image hosting service, <a href="https://www.flickr.com/photos/ilri-dagris/">Flickr</a>.
-          </p>
-          <p class="text-center">
-            <img src="sites/all/themes/ilri/images/flickr_dagris.png" alt="Flickr DAGRIS"/>
-          </p>
-          <a class="btn btn-primary btn-lg" href="<?php print $front_page . "images"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
-        </div>
-        <div id="web-links-detail">
-          <h2>Web Links</h2>
-          <p>
-            External sources of information about a particular breed.
-          </p>
-          <p class="text-center">
-            <img src="sites/all/themes/ilri/images/web_link_form.png" alt="Flickr DAGRIS"/>
-          </p>
-          <a class="btn btn-primary btn-lg" href="<?php print $front_page . "weblinks"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
-        </div>
-        <div id="traits-detail">
-          <h2>Traits</h2>
-          <p>
-            Characteristics of a given breed. Traits are mainly categorized into four groups:
-          </p>
-          <ul>
-            <li>Genetic</li>
-            <li>Physical</li>
-            <li>Production</li>
-            <li>Reproduction</li>
-          </ul>
-          <a class="btn btn-primary btn-lg indent" href="<?php print $front_page . "traits"; ?>" >More <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
-        </div>
       </div>
     </div>
   </div>
@@ -276,44 +233,6 @@ Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
        data-center="background-color:rgba(0,0,0,0.6)"
        data-bottom-top="background-color:rgba(0,0,0,0.0)">
     <div class="hsContent">
-    <div class="row">
-      <div class="col-md-4"
-           data-bottom-top="left: -600px;"
-           data-top="left: 0px;"
-           data-anchor-target="#slide-4">
-        <a href="https://ilri.org/users/skemp" class="circle-thumbnail" target="_blank">
-          <img src="sites/default/files/placeholder.png" alt="Prof. Steve Kemp">
-          <h3>Prof. Steve Kemp</h3>
-          <p>
-            Steve Kemp is a molecular geneticist particularly interested in the mechanisms of innate resistance to disease in livestock. He is a visiting scientist at ILRI and Professor of molecular genetics at the University of Liverpool, UK. Professor Kemp’s current research covers host genome diversity and adaptations to biotic and abiotic factors.
-          </p>
-        </a>
-      </div>
-      <div class="col-md-4"
-           data-bottom-top="bottom: -600px;"
-           data-top="bottom: 0px;"
-           data-anchor-target="#slide-4">
-        <a href="https://www.ilri.org/user/415" class="circle-thumbnail" target="_blank">
-          <img src="sites/default/files/placeholder.png" alt="Dr. Tadelle Dessie">
-          <h3>Dr. Tadelle Dessie</h3>
-          <p>
-            Tadelle Dessie has 20 years of research and development experience in various national and international research and development organizations. He has served as the group leader for Biotechnology Group based in ILRI-Ethiopia and is involved in the areas of knowledge management and capacity building. He is well versed with projects addressing research for development concentrating on understanding and improved utilization of animal resources to contribute for enhanced livelihoods of poor livestock keepers.
-          </p>
-        </a>
-      </div>
-      <div class="col-md-4"
-           data-bottom-top="left: 600px;"
-           data-top="left: 0px;"
-           data-anchor-target="#slide-4">
-        <a href="https://www.ilri.org/user/453" class="circle-thumbnail" target="_blank">
-          <img src="sites/default/files/placeholder.png" alt="Mrs. Yetnayet Mamo">
-          <h3>Yetnayet Mamo</h3>
-          <p>
-            Yetnayet Mamo Bishaw is an employee of the International Livestock Research Institute (ILRI) since September 1995 in Animal Genetic Resources Group (AnGR) first on temporary bases and then since June 2000 on permanent bases as Research Technologist in Addis Ababa, Ethiopia.
-          </p>
-        </a>
-      </div>
-    </div>
     <?php print render($page['parallax_section_4']); ?>
   </div>
 </div>
