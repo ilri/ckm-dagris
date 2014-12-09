@@ -28,6 +28,7 @@ regions[parallax_section_4]     = 'Prallax Section 4'
 ;; Stylesheets
 ;;;;;;;;;;;;;;;;;;;;;
 
+stylesheets[all][] = css/font-awesome.min.css
 stylesheets[all][] = css/style.min.css
 stylesheets[all][] = css/overrides.min.css
 
