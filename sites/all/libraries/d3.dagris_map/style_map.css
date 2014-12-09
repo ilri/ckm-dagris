@@ -1,0 +1,30 @@
+svg rect {
+  fill: rgba(255,255,255,0.8);
+}
+
+svg text {
+  fill: white;
+  font: 18px;
+  text-anchor: end;
+  padding-right: 5px;
+}
+
+svg text.total{
+  text-anchor: start;
+}
+
+div.d3.dagris_bar.d3-processed{
+  background-color: rgba(0,0,0,0.5);
+  padding: 30px 20px;
+  text-align: left;
+}
+
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
+path:hover {
+  fill: #712d3d;
+  cursor: pointer;
+}
