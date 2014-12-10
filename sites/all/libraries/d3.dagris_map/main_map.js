@@ -48,7 +48,7 @@
       .attr("width", width)
       .attr("height", height);
 
-   console.log($("svg").width());
+  // console.log($("svg").width());
 
     var path = d3.geo.path()
       .projection(projection);
