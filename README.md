@@ -12,3 +12,7 @@ DAGRIS has previously been developed as a classic ASP web application with a Mic
 # Environment Setup
 
 Please refer to the [wiki](https://github.com/ilri/DAGRIS/wiki) to setup a [Vagrant](http://www.vagrantup.com/)-based development environment.
+
+# License
+
+This project is licensed under the [GNU General Public License Version 3 (GPL v3)](license.md).
