@@ -7,3 +7,6 @@ sites/*/private
 
 # Ignore DB sql file
 _db/dagris_db.sql
+
+# Ignore PHPStorm Project files
+.idea/
