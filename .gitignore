@@ -7,3 +7,9 @@ sites/*/private
 
 # Ignore DB sql file
 _db/dagris_db.sql
+
+# JebBrains IDE
+.idea/
+
+# MAC OS .DS_Store files
+.DS_Store
