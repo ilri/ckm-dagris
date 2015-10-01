@@ -14,6 +14,9 @@ sudo apt-get install python-software-properties build-essential -y
 sudo add-apt-repository ppa:ondrej/php5 -y
 sudo apt-get install php5-common php5-dev libapache2-mod-php5 php5-cli php5-fpm -y
 sudo apt-get install curl php5-curl php5-gd php5-mcrypt php5-mysql -y
+sudo apt-get install php-pear -y
+sudo pear channel-discover pear.drush.org 
+pear install drush/drush
 a2enmod rewrite
 sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini

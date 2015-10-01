@@ -7,6 +7,7 @@ sites/*/private
 
 # Ignore DB sql file
 _db/dagris_db.sql
+_db/dagris4.sql
 
 # MAC OS .DS_Store files
 .DS_Store
