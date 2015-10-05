@@ -1,8 +1,9 @@
 (function ($) {
-  Drupal.behaviors.addLinkToColorboxCurrent =  {
+  Drupal.behaviors.addLinkToColorboxCurrent = {
     attach: function(context, settings) {
       var url = $("img[class='cboxPhoto']").attr('src');
-      if(url){
+      var regex = new RegExp(/^https?:\/\/([a-z0-9-]+\.)*flickr\.com(\/.*)?$/);
+      if (url && url.match(regex)) {
         var photo_id = url.split('/')[4];
         var link = /^[^_]*/.exec(photo_id);
         var linktext = Drupal.t('View on Flickr.');
