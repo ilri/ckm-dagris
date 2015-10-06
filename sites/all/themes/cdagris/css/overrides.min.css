@@ -4,11 +4,6 @@ html body.front.admin-menu {
   margin-top: 0px !important;
 }
 
-body.front,
-body.front.admin-menu.navbar-is-fixed-top {
-  padding-top: 0px !important;
-}
-
 header.front-page-header{
   margin-bottom: 0px;
 }
