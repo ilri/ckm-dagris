@@ -180,4 +180,7 @@
 </div>
 <footer class="footer container">
   <?php print render($page['footer']); ?>
+  <div class="language-switcher">
+    <?php print render($page['footer_language_selector']); ?>
+  </div>
 </footer>

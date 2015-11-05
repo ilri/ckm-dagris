@@ -234,6 +234,9 @@ Cattle, Chickens, Dromedary Camels, Goats, Pigs, Sheep and Yaks.
        data-bottom-top="background-color:rgba(0,0,0,0.0)">
     <div class="hsContent">
     <?php print render($page['parallax_section_4']); ?>
+    <div class="language-switcher">
+      <?php print render($page['footer_language_selector']); ?>
+    </div>
   </div>
 </div>
 </div>
