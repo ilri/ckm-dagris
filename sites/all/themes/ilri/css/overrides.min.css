@@ -46,3 +46,7 @@ ul.language-switcher-locale-url li{
 ul.language-switcher-locale-url li img{
   display: inline;
 }
+
+header#navbar i.fa{
+  font-size: 1.3em;
+}
