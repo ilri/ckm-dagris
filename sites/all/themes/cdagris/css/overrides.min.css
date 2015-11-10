@@ -122,3 +122,7 @@ ul.language-switcher-locale-url li img{
 header#navbar i.fa{
   font-size: 1.3em;
 }
+
+body.page-user h1.page-header{
+  display: none;
+}
