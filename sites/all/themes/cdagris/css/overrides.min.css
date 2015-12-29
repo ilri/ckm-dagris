@@ -18,7 +18,7 @@ html body.front.admin-menu.navbar-is-fixed-top {
 }
 
 .hsContent{
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.4);
 }
 
 .species-box {
@@ -125,4 +125,17 @@ header#navbar i.fa{
 
 body.page-user h1.page-header{
   display: none;
+}
+
+header#navbar .nav > li > a {
+  padding: 12px 12px;
+}
+
+.region-parallax-section-1-2 {
+  padding: 20px 20px;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.view-cdagris-home-para-1 .col-md-6{
+  padding: 1px;
 }

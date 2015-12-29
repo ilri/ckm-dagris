@@ -127,7 +127,12 @@
     data--75-top-top="opacity: 0; left: -50%;"
     data-anchor-target="#slide-1 h1">
     <div class="row no-gutter">
-      <?php print render($page['parallax_section_1']); ?>
+      <div class="col-md-6">
+        <?php print render($page['parallax_section_1_1']); ?>
+      </div>
+      <div class="col-md-6">
+        <?php print render($page['parallax_section_1_2']); ?>
+      </div>
     </div>
   </div>
 </div>

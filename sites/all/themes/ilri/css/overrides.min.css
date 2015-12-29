@@ -54,3 +54,7 @@ header#navbar i.fa{
 body.page-user h1.page-header{
   display: none;
 }
+
+header#navbar .nav > li > a {
+  padding: 12px 12px;
+}
