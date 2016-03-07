@@ -1,6 +1,7 @@
 <VirtualHost *:80>
         ServerName dagris.local
-        ServerAdmin me@example.com
+        ServerAdmin info@dagris.local
+        ServerAlias *.dagris.local
 
         DocumentRoot "/var/www/html/dagris"
 
