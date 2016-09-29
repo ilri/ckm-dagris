@@ -2,15 +2,15 @@
 @import 'variables.less';
 
 // Media query variables.
-@tablet:  ~"screen and (min-width: @{screen-sm-min})";
-@normal:  ~"screen and (min-width: @{screen-md-min})";
-@wide:    ~"screen and (min-width: @{screen-lg-min})";
+@tablet: ~"screen and (min-width: @{screen-sm-min})";
+@normal: ~"screen and (min-width: @{screen-md-min})";
+@wide: ~"screen and (min-width: @{screen-lg-min})";
 
 // Drop shadows.
 .box-shadow(@shadow) {
   -webkit-box-shadow: @shadow;
-     -moz-box-shadow: @shadow;
-          box-shadow: @shadow;
+  -moz-box-shadow: @shadow;
+  box-shadow: @shadow;
 }
 
 html {
@@ -20,7 +20,7 @@ html {
   &.js {
     // Collapsible fieldsets.
     fieldset.collapsed {
-     height: auto;
+      height: auto;
     }
     // Throbbers.
     input.form-autocomplete {
@@ -28,6 +28,7 @@ html {
     }
   }
 }
+
 body {
   // Fix horizontal scrolling on iOS devices.
   // http://drupal.org/node/1870076
@@ -114,19 +115,24 @@ body {
 .overlay-element {
   z-index: 1500;
 }
+
 #toolbar {
   z-index: 1600;
 }
+
 // Adjust z-index of bootstrap modals
 .modal {
   z-index: 1620;
 }
+
 .modal-dialog {
   z-index: 1630;
 }
+
 .modal-backdrop {
   z-index: 1610;
 }
+
 .footer {
   margin-top: 45px;
   padding-top: 35px;
@@ -193,6 +199,7 @@ p:last-child {
 form#search-block-form {
   margin: 0;
 }
+
 .navbar #block-search-form {
   float: none;
   margin: 5px 0 5px 5px;
@@ -200,8 +207,9 @@ form#search-block-form {
     float: right;
   }
 }
+
 .navbar-search .control-group {
-  margin-bottom:0px;
+  margin-bottom: 0px;
 }
 
 // Action Links
@@ -223,18 +231,22 @@ input, textarea, select, .uneditable-input {
   max-width: 100%;
   width: auto;
 }
+
 input.error {
   color: @state-danger-text;
   border-color: @state-danger-border;
 }
+
 fieldset legend.panel-heading {
   float: left;
   line-height: 1em;
   margin: 0;
 }
+
 fieldset .panel-body {
   clear: both;
 }
+
 fieldset .panel-heading a.panel-title {
   color: inherit;
   display: block;
@@ -244,12 +256,15 @@ fieldset .panel-heading a.panel-title {
     text-decoration: none;
   }
 }
-.form-actions{
+
+.form-actions {
   clear: both;
 }
+
 .resizable-textarea textarea {
   border-radius: @border-radius-base @border-radius-base 0 0;
 }
+
 .radio, .checkbox {
   &:first-child {
     margin-top: 0;
@@ -258,15 +273,18 @@ fieldset .panel-heading a.panel-title {
     margin-bottom: 0;
   }
 }
+
 .help-block, .control-group .help-inline {
   color: @gray-light;
   font-size: 12px;
   margin: 5px 0 10px;
   padding: 0;
 }
+
 .panel-heading {
   display: block;
 }
+
 a.tabledrag-handle .handle {
   height: auto;
   width: auto;
@@ -276,11 +294,13 @@ a.tabledrag-handle .handle {
 .error {
   color: @state-danger-text;
 }
+
 div.error,
 table tr.error {
   background-color: @state-danger-bg;
   color: @state-danger-text;
 }
+
 .control-group.error {
   background: none;
   label, .control-label {
@@ -302,15 +322,18 @@ table tr.error {
     padding-left: 0;
   }
 }
+
 .nav-tabs {
   margin-bottom: 10px;
 }
+
 ul li.collapsed,
 ul li.expanded,
 ul li.leaf {
   list-style: none;
   list-style-image: none;
 }
+
 .tabs--secondary {
   margin: 0 0 10px;
 }
@@ -326,16 +349,19 @@ ul li.leaf {
 // Password strength indicator.
 .password-strength {
   width: 17em;
-  float: right;  /* LTR */
+  float: right; /* LTR */
   margin-top: 1.4em;
 }
+
 .password-strength-title {
   display: inline;
 }
+
 .password-strength-text {
   float: right; /* LTR */
   font-weight: bold;
 }
+
 .password-indicator {
   background-color: darken(@input-color-placeholder, 2%);
   height: 0.3em;
@@ -346,26 +372,31 @@ ul li.leaf {
     background-color: @input-color-placeholder;
   }
 }
+
 input.password-confirm,
 input.password-field {
   width: 16em;
   margin-bottom: 0.4em;
 }
+
 div.password-confirm {
-  float: right;  /* LTR */
+  float: right; /* LTR */
   margin-top: 1.5em;
   visibility: hidden;
   width: 17em;
 }
+
 div.form-item div.password-suggestions {
   padding: 0.2em 0.5em;
   margin: 0.7em 0;
   width: 38.5em;
   border: 1px solid #B4B4B4;
 }
+
 div.password-suggestions ul {
   margin-bottom: 0;
 }
+
 .confirm-parent,
 .password-parent {
   clear: left; /* LTR */
@@ -414,10 +445,12 @@ div.password-suggestions ul {
   -webkit-animation: spin 1s infinite linear;
   animation: spin 1s infinite linear;
 }
+
 a .glyphicon-spin {
   display: inline-block;
   text-decoration: none;
 }
+
 @-moz-keyframes spin {
   0% {
     -moz-transform: rotate(0deg);
@@ -426,6 +459,7 @@ a .glyphicon-spin {
     -moz-transform: rotate(359deg);
   }
 }
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -434,6 +468,7 @@ a .glyphicon-spin {
     -webkit-transform: rotate(359deg);
   }
 }
+
 @-o-keyframes spin {
   0% {
     -o-transform: rotate(0deg);
@@ -442,6 +477,7 @@ a .glyphicon-spin {
     -o-transform: rotate(359deg);
   }
 }
+
 @-ms-keyframes spin {
   0% {
     -ms-transform: rotate(0deg);
@@ -450,6 +486,7 @@ a .glyphicon-spin {
     -ms-transform: rotate(359deg);
   }
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -475,6 +512,7 @@ a .glyphicon-spin {
 .tabbable {
   margin-bottom: 20px;
 }
+
 .tabs-below, .tabs-left, .tabs-right {
   > .nav-tabs {
     border-bottom: 0;
@@ -484,9 +522,11 @@ a .glyphicon-spin {
     }
   }
 }
+
 .tab-pane > .panel-heading {
   display: none;
 }
+
 .tab-content > .active {
   display: block;
 }
@@ -539,7 +579,7 @@ a .glyphicon-spin {
   }
   > .tab-content {
     border-radius: 0 @border-radius-base @border-radius-base @border-radius-base;
-    .box-shadow(0 1px 1px rgba(0,0,0,.05));
+    .box-shadow(0 1px 1px rgba(0, 0, 0, .05));
     border: 1px solid @nav-tabs-border-color;
     overflow: hidden;
     padding: 10px 15px;
@@ -562,7 +602,7 @@ a .glyphicon-spin {
     > .active > a:hover,
     > .active > a:focus {
       border-color: @nav-tabs-border-color transparent @nav-tabs-border-color @nav-tabs-border-color;
-      .box-shadow(-1px 1px 1px rgba(0,0,0,.05));
+      .box-shadow(-1px 1px 1px rgba(0, 0, 0, .05));
     }
   }
 }
@@ -577,7 +617,7 @@ a .glyphicon-spin {
       &:hover,
       &:focus {
         border-color: @nav-tabs-link-hover-border-color @nav-tabs-link-hover-border-color @nav-tabs-link-hover-border-color @nav-tabs-border-color;
-        .box-shadow(1px 1px 1px rgba(0,0,0,.05));
+        .box-shadow(1px 1px 1px rgba(0, 0, 0, .05));
       }
     }
     > .active > a,
@@ -600,11 +640,11 @@ td.radio {
 .views-display-settings {
   .label {
     font-size: 100%;
-    color:#666666;
+    color: #666666;
   }
   .footer {
-    padding:0;
-    margin:4px 0 0 0;
+    padding: 0;
+    margin: 4px 0 0 0;
   }
 }
 
@@ -623,7 +663,7 @@ table {
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 7px;
-  padding-left:  (@grid-gutter-width / 2);
+  padding-left: (@grid-gutter-width / 2);
   padding-right: (@grid-gutter-width / 2);
   text-align: right;
 
@@ -637,20 +677,24 @@ table {
 .alert a {
   font-weight: @alert-link-font-weight;
 }
+
 .alert-success a {
   color: darken(@alert-success-text, 10%);
 }
+
 .alert-info a {
   color: darken(@alert-info-text, 10%);
 }
+
 .alert-warning a {
   color: darken(@alert-warning-text, 10%);
 }
+
 .alert-danger a {
   color: darken(@alert-danger-text, 10%);
 }
 
 .navbar-form .input-group-btn,
 .navbar-form .input-group-addon {
-width: auto;
+  width: auto;
 }
