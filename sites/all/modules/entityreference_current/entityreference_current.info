@@ -4,11 +4,10 @@ core = 7.x
 package = Fields
 dependencies[] = entityreference
 
-files[] = entityreference_current.test
 
-; Information added by drupal.org packaging script on 2013-08-13
-version = "7.x-1.0-alpha1"
+; Information added by Drupal.org packaging script on 2014-10-20
+version = "7.x-1.0-alpha2"
 core = "7.x"
 project = "entityreference_current"
-datestamp = "1376405797"
+datestamp = "1413764329"
 

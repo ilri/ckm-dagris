@@ -51,6 +51,7 @@ function entityreference_current_field_update_instance($instance, $prior_instanc
  * Implements hook_field_attach_form().
  */
 function entityreference_current_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
+  module_load_include('inc', 'entityreference_current');
   list($id, , $bundle) = entity_extract_ids($entity_type, $entity);
 
   if (!empty($form_state['triggering_element']['#ajax'])) {
@@ -127,6 +128,7 @@ function entityreference_current_field_attach_form($entity_type, $entity, &$form
  * Implements hook_field_access().
  */
 function entityreference_current_field_access($op, $field, $entity_type, $entity, $account) {
+  module_load_include('inc', 'entityreference_current');
   if ($op != 'edit' || $field['type'] != 'entityreference') {
     return;
   }
@@ -168,6 +170,7 @@ function entityreference_current_field_access($op, $field, $entity_type, $entity
  * @todo Check field cardinality.
  */
 function entityreference_current_field_default_value($entity_type, $entity, $field, $instance, $langcode) {
+  module_load_include('inc', 'entityreference_current');
   $items = array();
   if ($ids = entityreference_current_get_values($field, $instance)) {
     $items = array();
@@ -178,209 +181,7 @@ function entityreference_current_field_default_value($entity_type, $entity, $fie
   return $items;
 }
 
-/**
- * Wrapper function to get context (e.g. from Menu Object or OG-context).
- *
- * @param $entity_type
- *   The entity type the entity.
- * @param $entity
- *   The entity object that is being checked.
- * @param $field
- *   The field info array.
- * @param $instance
- *   The instance info array.
- * @param $validate
- *   Determine if access validation should be performed. Defaults to TRUE.
- *
- * @return
- *   Array of IDs a user may view.
- */
-function entityreference_current_get_values($field, $instance, $validate = TRUE) {
-  if (!$instance['settings']['behaviors']['current']['status']) {
-    // Do nothing when current is disabled for this field.
-    return;
-  }
 
-  $field_name = $field['field_name'];
-  $target_type = $field['settings']['target_type'];
 
-  $cache = &drupal_static(__FUNCTION__, array());
-  $identifier = array(
-    $instance['entity_type'],
-    $instance['bundle'],
-    $field_name,
-    $validate,
-  );
 
-  $identifier = implode(':', $identifier);
 
-  if (isset($cache[$identifier])) {
-    return $cache[$identifier];
-  }
-
-  $cache[$identifier] = $ids = array();
-
-  // Check if we have cached values.
-  if (!$ids) {
-    $ids = entityreference_current_get_values_from_cache($field, $instance);
-  }
-
-  // Check if there are values in the Menu Object.
-  if (!$ids) {
-    $entity = entityreference_current_get_current_entity($field, $instance);
-    if ($entity) {
-      $entity_ids = entity_extract_ids($target_type, $entity);
-      $ids = array($entity_ids[0]);
-    }
-  }
-
-  if (!$ids || !$validate) {
-    // No IDs found, or no validation is needed.
-    $cache[$identifier] = $ids;
-    return $ids;
-  }
-
-  $handler = entityreference_get_selection_handler($field, $instance);
-  if (!$ids = $handler->validateReferencableEntities($ids)) {
-    $cache[$identifier] = FALSE;
-    return;
-  }
-
-  // Check access to the provided entities.
-  $target_type = $field['settings']['target_type'];
-  entity_load($target_type, $ids);
-  foreach ($ids as $delta => $id) {
-    $entity = entity_load_single($target_type, $id);
-    if (!$entity || !entity_access('view', $target_type, $entity)) {
-      unset($ids[$delta]);
-    }
-  }
-
-  $cache[$identifier] = $ids;
-  return $ids;
-}
-
-/**
- * Get the values from the cached form.
- *
- * @param $field
- *   The field info array.
- * @param $instance
- *   The instance info array.
- *
- * @see
- *   entityreference_current_get_values()
- */
-function entityreference_current_get_values_from_cache($field, $instance) {
-  // Try to get the form out of cache.
-  if (!$form_build_id = isset($_GET['form_build_id']) ? $_GET['form_build_id'] : isset($_POST['form_build_id']) ? $_POST['form_build_id'] : NULL) {
-    return;
-  }
-
-  $field_name = $field['field_name'];
-
-  $form_state = array();
-  form_get_cache($form_build_id, $form_state);
-
-  // If successful, get the value from the form_state.
-  return isset($form_state['entityreference_current'][$instance['entity_type']][$instance['bundle']][$field_name]) ? $form_state['entityreference_current'][$instance['entity_type']][$instance['bundle']][$field_name] : FALSE;
-}
-
-/**
- * Get values for prepopulating fields via Object.
- *
- * @param $field
- *   The field info array.
- * @param $instance
- *   The instance info array.
- *
- * @see
- *   entityreference_current_get_values()
- */
-function entityreference_current_get_current_entity($field, $instance) {
-  $target_type = $field['settings']['target_type'];
-  $entity = menu_get_object($target_type);
-  if (empty($entity) && !empty($instance['settings']['behaviors']['current']['use_uid']) && $target_type == 'user') {
-    // If target is user check to see if we can get uid from entity(only for nodes)
-    $entity = menu_get_object();
-    if (!empty($entity->uid)) {
-      $entity = user_load($entity->uid);
-    }
-  }
-  return $entity;
-}
-
-/**
- * Return a form element with crafted links to create nodes for a group.
- *
- * @param $entity_type
- *   The entity type of the referenced entity.
- * @param $entity_id
- *   The entity ID of the referenced entity.
- * @param $destination
- *   Optional; The destination after a node is created. Defaults to the
- *   destination passed in the URL if exists, otherwise back to the current
- *   page.
- * @param $types
- *   Optional; An array of type names. Restrict the created links to the given
- *   types.
- */
-function entityreference_current_create_node_links($entity_type, $entity_id, $field_name, $destination = NULL, $types = NULL) {
-  $wrapper = entity_metadata_wrapper($entity_type, $entity_id);
-  $field = field_info_field($field_name);
-
-  $entity = entity_load_single($entity_type, $entity_id);
-  list(, , $bundle) = entity_extract_ids($entity_type, $entity);
-
-  $types = isset($types) ? $types : array_keys(node_type_get_types());
-  $names = array();
-  foreach ($types as $type_name) {
-    if ($field['settings']['target_type'] != $entity_type) {
-      // The entity type isn't referenced by the field.
-      continue;
-    }
-
-    if (!empty($field['settings']['handler_settings']['target_bundles']) && !in_array($bundle, $field['settings']['handler_settings']['target_bundles'])) {
-      // The entity bundle isn't referenced by the field.
-      continue;
-    }
-
-    $instance = field_info_instance('node', $field_name, $type_name);
-    if (empty($instance['settings']['behaviors']['current']['status'])) {
-      // The field doesn't exist on the node type, or doesn't have current
-      // enabled.
-      continue;
-    }
-
-    if (!node_access('create', $type_name)) {
-      continue;
-    }
-
-    $names[$type_name] = node_type_get_name($type_name);
-  }
-
-  if (empty($names)) {
-    return;
-  }
-
-  // Sort names.
-  asort($names);
-
-  // Build links.
-  $options = array(
-    'query' => array($field_name => $entity_id) + drupal_get_destination(),
-  );
-
-  $items = array();
-  foreach ($names as $type => $name) {
-    $items[] = array('data' => l($name, 'node/add/' . str_replace('_', '-', $type), $options));
-  }
-
-  $element = array();
-  $element['entityreference_current'] = array(
-    '#theme' => 'item_list',
-    '#items' => $items,
-  );
-
-  return $element;
-}
