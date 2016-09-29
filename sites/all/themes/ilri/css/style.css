@@ -6915,6 +6915,15 @@ section div.member a {
   display: inline-block;
   margin-right: 20px;
 }
+body.front {
+  padding-top: 0px !important;
+}
+body.front.admin-menu {
+  margin-top: 0px !important;
+}
+body.front.admin-menu.navbar-is-fixed-top {
+  padding-top: 0px !important;
+}
 /********* Tooltip *********/
 #map-tool-tip {
   display: none;
