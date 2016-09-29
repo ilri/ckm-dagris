@@ -6924,6 +6924,9 @@ body.front.admin-menu {
 body.front.admin-menu.navbar-is-fixed-top {
   padding-top: 0px !important;
 }
+body.front.navbar-is-fixed-top {
+  padding-top: 0px !important;
+}
 /********* Tooltip *********/
 #map-tool-tip {
   display: none;

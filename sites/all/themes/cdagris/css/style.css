@@ -6953,6 +6953,9 @@ html body.front.admin-menu {
 html body.front.admin-menu.navbar-is-fixed-top {
   padding-top: 0px !important;
 }
+html body.front.navbar-is-fixed-top {
+  padding-top: 0px !important;
+}
 html body.page-user h1.page-header {
   display: none;
 }
