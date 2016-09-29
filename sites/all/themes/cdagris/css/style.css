@@ -7045,3 +7045,22 @@ html body section.parallax div.hsContainer div.hsContent a.species-box div.speci
 .view-cdagris-home-para-1 .col-md-6 {
   padding: 1px;
 }
+/********** Tabs **********/
+ul.tabs--primary.nav-tabs {
+  border-bottom: none;
+}
+ul.tabs--primary.nav-tabs li a {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  border: none;
+}
+ul.tabs--primary.nav-tabs li a:hover {
+  background-color: #078930;
+  color: white;
+}
+ul.tabs--primary.nav-tabs li.active a {
+  background-color: #E99002;
+  color: white;
+  border: none;
+}

@@ -251,3 +251,27 @@ div.language-switcher {
     }
   }
 }
+
+/********** Tabs **********/
+ul.tabs--primary.nav-tabs {
+  border-bottom: none;
+  li {
+    a {
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      border-radius: 0px;
+      border: none;
+      &:hover {
+        background-color: @brand-primary;
+        color: white;
+      }
+    }
+    &.active {
+      a {
+        background-color: @brand-warning;
+        color: white;
+        border: none;
+      }
+    }
+  }
+}

@@ -6952,3 +6952,22 @@ div.language-switcher ul.language-switcher-locale-url li {
 div.language-switcher ul.language-switcher-locale-url li img {
   display: inline;
 }
+/********** Tabs **********/
+ul.tabs--primary.nav-tabs {
+  border-bottom: none;
+}
+ul.tabs--primary.nav-tabs li a {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  border: none;
+}
+ul.tabs--primary.nav-tabs li a:hover {
+  background-color: #712d3d;
+  color: white;
+}
+ul.tabs--primary.nav-tabs li.active a {
+  background-color: #E99002;
+  color: white;
+  border: none;
+}

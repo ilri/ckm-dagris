@@ -1,11 +1,27 @@
 <?php
 /**
  * @file
- * status-messages.func.php
+ * Stub file for bootstrap_status_messages().
  */
 
 /**
- * Overrides theme_status_messages().
+ * Returns HTML for status and/or error messages, grouped by type.
+ *
+ * An invisible heading identifies the messages for assistive technology.
+ * Sighted users see a colored box. See http://www.w3.org/TR/WCAG-TECHS/H69.html
+ * for info.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - display: (optional) Set to 'status' or 'error' to display only messages
+ *     of that type.
+ *
+ * @return string
+ *   The constructed HTML.
+ *
+ * @see theme_status_messages()
+ *
+ * @ingroup theme_functions
  */
 function bootstrap_status_messages($variables) {
   $display = $variables['display'];
@@ -30,7 +46,15 @@ function bootstrap_status_messages($variables) {
     'info' => 'info',
   );
 
-  foreach (drupal_get_messages($display) as $type => $messages) {
+  // Retrieve messages.
+  $message_list = drupal_get_messages($display);
+
+  // Allow the disabled_messages module to filter the messages, if enabled.
+  if (module_exists('disable_messages') && variable_get('disable_messages_enable', '1')) {
+    $message_list = disable_messages_apply_filters($message_list);
+  }
+
+  foreach ($message_list as $type => $messages) {
     $class = (isset($status_class[$type])) ? ' alert-' . $status_class[$type] : '';
     $output .= "<div class=\"alert alert-block$class messages $type\">\n";
     $output .= "  <a class=\"close\" data-dismiss=\"alert\" href=\"#\">&times;</a>\n";

@@ -1,15 +1,21 @@
 <?php
 /**
  * @file
- * picture.vars.php
+ * Stub file for "picture" theme hook [pre]process functions.
  */
 
 /**
- * Implements hook_preprocess_picture().
+ * Pre-processes variables for the "picture" theme hook.
+ *
+ * See theme function for list of available variables.
+ *
+ * @see theme_picture()
+ *
+ * @ingroup theme_preprocess
  */
 function bootstrap_preprocess_picture(&$variables) {
   // Add responsiveness, if necessary.
-  if ($shape = theme_get_setting('bootstrap_image_responsive')) {
+  if ($shape = bootstrap_setting('image_responsive')) {
     $variables['attributes']['class'][] = 'img-responsive';
   }
 }
