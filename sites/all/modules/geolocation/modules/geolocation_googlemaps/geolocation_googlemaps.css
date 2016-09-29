@@ -28,15 +28,6 @@
   margin: 1em 0;
 }
 
-.geolocation-help {
-  font-size: .8em;
-}
-
-.geolocation-help span{
-  font-size: 1.2em;
-  display: inline-block;
-}
-
 .geolocation-lat-item,
 .geolocation-lng-item {
   float: left;
@@ -60,7 +51,7 @@
 }
 
 .geolocation-address .form-type-textfield {
-  /*float: left;*/
+  float: left;
 }
 
 .geolocation-remove {
