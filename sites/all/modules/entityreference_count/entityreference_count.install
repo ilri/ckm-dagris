@@ -1,0 +1,50 @@
+<?php
+/**
+ * @file
+ * Installation and update hooks for EntityReference_Count.
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function entityreference_count_field_schema($field) {
+  return array(
+    'columns' => array(
+      'count' => array(
+        'type'     => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+  );
+}
+
+/**
+* Implements hook_update_N().
+* Fixes an issue with display formatter naming.
+*/
+function entityreference_count_update_7100() {
+  $fields = field_read_fields(array('type' => 'entityreference_count'));
+  foreach ($fields as $field_name => $info) {
+    $full_info = field_info_field($field_name);
+    foreach ($full_info['bundles'] as $type => $bundles) {
+      foreach ($bundles as $bundle_name) {
+        $field_instance = field_info_instance($type, $field_name, $bundle_name);
+        foreach ($field_instance['display'] as $display_name => $display) {
+          switch ($display['type']) {
+            case 'entityreference_count_default':
+              $field_instance['display'][$display_name]['type'] = 'entityreference_count_formatter_default';
+              break;
+            case 'entityreference_count_nonzero':
+              $field_instance['display'][$display_name]['type'] = 'entityreference_count_formatter_nonzero';
+              break;
+            case 'entityreference_count_labeled_count':
+              $field_instance['display'][$display_name]['type'] = 'entityreference_count_formatter_labeled_count';
+              break;
+          }
+        }
+        field_update_instance($field_instance);
+      }
+    }
+  }
+}

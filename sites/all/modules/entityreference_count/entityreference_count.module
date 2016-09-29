@@ -16,32 +16,13 @@ function entityreference_count_field_info() {
       'instance_settings' => array(
         'counted_reference_fields' => array(),
         'count_only_published' => TRUE,
+        'allowed_bundles' => array(),
       ),
       'default_widget' => 'entityreference_count_widget',
       'default_formatter' => 'entityreference_count_formatter_default',
+      'property_type' => 'integer',
     ),
   );
-}
-
-/**
- * Generate a list of available node reference fields to count.
- *
- * @param $bundle
- *   The field instance bundle.
- * @return
- *   An array of nodereference fields that are available to count.
- */
-function entityreference_count_field_options($bundle) {
-  $field_types = field_info_fields();
-  $field_options = array();
-
-  foreach ($field_types as $field_type) {
-    if ($field_type['type'] == 'entityreference' && isset($field_type['settings']['handler_settings']['target_bundles'][$bundle]) && $field_type['settings']['handler_settings']['target_bundles'][$bundle] === $bundle) {
-      $field_options[$field_type['field_name']] = check_plain($field_type['field_name']);
-    }
-  }
-
-  return $field_options;
 }
 
 /**
@@ -49,48 +30,55 @@ function entityreference_count_field_options($bundle) {
  */
 function entityreference_count_field_instance_settings_form($field, $instance) {
   $settings = $instance['settings'];
-  $options = entityreference_count_field_options($instance['bundle']);
   $form = array();
 
-  if (empty($options)) {
+  $er_fields = array();
+  foreach (field_read_fields(array('type' => 'entityreference', 'entity_type' => $instance['entity_type'])) as $field_name => $field_info) {
+    $er_fields[$field_name] = $field_name;
+  }
+
+  if (empty($er_fields)) {
     $form['counted_reference_fields_empty'] = array(
       '#prefix' => '<p>',
-      '#markup' => t('There are no entity reference fields to count. If you wish to count the number of references to a entity of this type, add a entityreference field to another content type, allowing it to reference this content type.'),
+      '#markup' => t('There are no entity reference fields to count. If you wish to count the number of references to an entity of this type, add an entityreference field to another bundle, allowing it to reference this bundle.'),
       '#suffix' => '</p>',
     );
   }
   else {
     $form['counted_reference_fields'] = array(
       '#type' => 'checkboxes',
-      '#title' => t('Entity reference fields that may be counted'),
-      '#description' => t('Select the entity refence fields that you would like to count.'),
+      '#title' => t('Entity reference fields that may be counted:'),
+      '#description' => t('Select the entity reference fields that you would like to count.'),
       '#multiple' => TRUE,
       '#default_value' => $settings['counted_reference_fields'],
-      '#options' => $options,
+      '#options' => $er_fields,
     );
-    $form['count_only_published'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Do not count references from unpublished nodes.'),
-      '#default_value' => $settings['count_only_published'],
+    $bundles_list = field_info_bundles($instance['entity_type']);
+    $bundles = array();
+    if ($bundles_list) {
+      foreach ($bundles_list as $bkey => $data) {
+        $bundles[$bkey] = $data['label'];
+      }
+    }
+    if ($instance['entity_type'] == 'node') {
+      $form['count_only_published'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Do not count references from unpublished nodes.'),
+        '#default_value' => $settings['count_only_published'],
+      );
+    }
+    $form['allowed_bundles'] = array(
+      '#type' => 'select',
+      '#title' => t('Count references that belong to these bundles:'),
+      '#description' => t('If no bundles are selected, all bundles will be counted.'),
+      '#options' => $bundles,
+      '#multiple' => TRUE,
+      '#default_value' => !empty($settings['allowed_bundles']) ? array_filter($settings['allowed_bundles']) : array(),
+      '#size' => max(4, count($bundles)),
     );
   }
 
   return $form;
-}
-
-/**
- * Implements hook_field_schema().
- */
-function entityreference_count_field_schema($field) {
-  return array(
-    'columns' => array(
-      'count' => array(
-        'type'     => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-    ),
-  );
 }
 
 /**
@@ -121,33 +109,185 @@ function entityreference_count_field_widget_info() {
  */
 function entityreference_count_field_formatter_info() {
   return array(
-    'entityreference_count_default' => array(
+    'entityreference_count_formatter_default' => array(
       'label' => t('Default'),
       'field types' => array('entityreference_count'),
+      'settings'  => array(
+        'link' => FALSE,
+        'link_class' => '',
+      ),
     ),
-    'entityreference_count_nonzero' => array(
+    'entityreference_count_formatter_nonzero' => array(
       'label' => t('Non-zero'),
       'field types' => array('entityreference_count'),
     ),
+    'entityreference_count_formatter_labeled_count' => array(
+      'label' => t('Labeled Count'),
+      'field types' => array('entityreference_count'),
+      'settings'  => array(
+        'link' => FALSE,
+        'link_class' => '',
+        'singular' => '',
+        'plural' => '',
+      ),
+    ),
   );
 }
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function entityreference_count_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $element = array();
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  if ($display['type'] == 'entityreference_count_formatter_default') {
+    $element['link'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Link count to the referenced entity'),
+      '#default_value' => $settings['link'],
+    );
+    $element['link_class'] = array(
+      '#type' => 'textfield',
+      '#title' => t('CSS class for the generated link.'),
+      '#default_value' => $settings['link_class'],
+      '#states' => array(
+        'visible' => array(
+          'input[name="fields[' . $field['field_name'] . '][settings_edit_form][settings][link]"], input[name="options[settings][link]"], input[name="link"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+  }
+
+  // Based on function format_plural
+  // See https://api.drupal.org/api/drupal/includes%21common.inc/function/format_plural/7
+  if ($display['type'] == 'entityreference_count_formatter_labeled_count') {
+    $element['singular'] = array(
+      '#title' => t('Singular Label'),
+      '#description' => t('The string for the singular case. Make sure it is clear this is singular, to ease translation (e.g., use "1 new comment" instead of "1 new"). Do not use @count in the singular string.'),
+      '#type' => 'textfield',
+      '#size' => 50,
+      '#default_value' => (empty($settings['singular'])) ? '1 reference' : $settings['singular'],
+      '#required' => TRUE,
+    );
+    $element['plural'] = array(
+      '#title' => t('Plural Label'),
+      '#description' => t('The string for the plural case. Make sure it is clear this is plural, to ease translation. Use @count in place of the item count, (e.g., "@count new comments").'),
+      '#type' => 'textfield',
+      '#size' => 50,
+      '#default_value' => (empty($settings['plural'])) ? '@count references' : $settings['plural'],
+      '#required' => TRUE,
+    );
+    $element['link'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Link count to the referenced entity'),
+      '#default_value' => $settings['link'],
+    );
+    $element['link_class'] = array(
+      '#type' => 'textfield',
+      '#title' => t('CSS class for the generated link.'),
+      '#default_value' => $settings['link_class'],
+      '#states' => array(
+        'visible' => array(
+          'input[name="fields[' . $field['field_name'] . '][settings_edit_form][settings][link]"], input[name="options[settings][link]"], input[name="link"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function entityreference_count_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $summary = array();
+
+  if ($display['type'] == 'entityreference_count_formatter_default') {
+    $summary[] = $settings['link'] ? t('Link to the referenced entity') : t('No link');
+    $summary[] = t('Link class: @link_class', array('@link_class' => $settings['link_class']));
+  }
+
+  if ($display['type'] == 'entityreference_count_formatter_labeled_count') {
+    $summary[] =  t('Singular label: @singular', array('@singular' => $settings['singular']));
+    $summary[] = t('Plural label: @plural', array('@plural' => $settings['plural']));
+    $summary[] = $settings['link'] ? t('Link to the referenced entity') : t('No link');
+    $summary[] = t('Link class: @link_class', array('@link_class' => $settings['link_class']));
+  }
+
+  return implode('<br />', $summary);
+}
+
+
 
 /**
  * Implements hook_field_formatter_view().
  */
 function entityreference_count_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
+  $settings = $display['settings'];
 
   switch ($display['type']) {
-    case 'entityreference_count_default':
+    case 'entityreference_count_formatter_default':
       foreach ($items as $delta => $item) {
-        $element[$delta] = array('#markup' => $item['count']);
+        // Handle Conditional Link Logic
+        if ($settings['link'] && ($uri = entity_uri($entity_type, $entity))) {
+          $element[$delta] = array('#markup' => l(
+            $item['count'],
+            $uri['path'],
+            array(
+              'html' => TRUE,
+              'attributes' => array(
+                'title' => $item['count'],
+                'class' => array($settings['link_class'])
+              ),
+            )
+          ));
+        }
+        else {
+          $element[$delta] = array('#markup' => $item['count']);
+        }
       }
       break;
 
-    case 'entityreference_count_nonzero':
+    case 'entityreference_count_formatter_nonzero':
       foreach ($items as $delta => $item) {
         if ($item['count'] > 0) {
+          $element[$delta] = array('#markup' => $item['count']);
+        }
+      }
+      break;
+
+    case 'entityreference_count_formatter_labeled_count':
+      foreach ($items as $delta => $item) {
+        $output = '';
+        // Handle Zero, Singular, Plural Logic
+        if ($item['count'] > 0) {
+          $output = format_plural($item['count'], $settings['singular'], $settings['plural']);
+        }
+        else {
+          $output = 0;
+        }
+        // Handle Conditional Link Logic
+        if ($settings['link'] && ($item['count'] > 0) && ($uri = entity_uri($entity_type, $entity))) {
+          $element[$delta] = array('#markup' => l(
+            $output,
+            $uri['path'],
+            array(
+              'html' => TRUE,
+              'attributes' => array(
+                'title' => $output,
+                'class' => array($settings['link_class'])
+              ),
+            )
+          ));
+        }
+        else {
           $element[$delta] = array('#markup' => $item['count']);
         }
       }
@@ -209,27 +349,31 @@ function entityreference_count_get_fields_db($field_names) {
  *   A count of the number of references to the entity
  */
 function entityreference_count_get_count($settings, $entity_type, $entity) {
-  // Get the db info for the node reference fields.
+
+  // Get the db info for the entityreference fields.
   $db = entityreference_count_get_fields_db($settings['counted_reference_fields']);
 
-  // Get the entity info
+  // Get the entity info.
   $entity_info = entity_get_info($entity_type);
 
-  // if not defined the base table and entity key id omit the count
+  // if not defined the base table and entity key id omit the count.
   if (empty($entity_info['base table']) && empty($entity_info['entity keys']['id'])) {
     return;
   }
 
-  if (!empty($db)) {
+  if (!empty($db) && isset($entity->{$entity_info['entity keys']['id']})) {
     $base_table = $entity_info['base table'];
     $entity_key_id = $entity_info['entity keys']['id'];
 
     $query = db_select($base_table, 'e');
     $query->fields('e', array($entity_key_id));
-    $alias = $query->innerJoin($db[0]['table'], 'nr', '%alias.entity_id = e.' . $entity_key_id);
+    $alias = $query->innerJoin($db[0]['table'], 'er', '%alias.entity_id = e.' . $entity_key_id);
     $query->condition("{$alias}.{$db[0]['column']}", $entity->{$entity_key_id});
-    if ($settings['count_only_published']) {
-      $query->condition('e.status', 1);
+    if ($entity_type == 'node' && $settings['count_only_published']) {
+      $query->condition('e.status', NODE_PUBLISHED);
+    }
+    if (!empty($settings['allowed_bundles'])) {
+      $query->condition('er.bundle', array_keys($settings['allowed_bundles']), 'IN');
     }
 
     unset($db[0]);
@@ -238,10 +382,13 @@ function entityreference_count_get_count($settings, $entity_type, $entity) {
     foreach ($db as $d) {
       $select = db_select($base_table, 'e');
       $select->fields('e', array($entity_key_id));
-      $alias = $select->innerJoin($d['table'], 'nr', '%alias.entity_id = e.' . $entity_key_id);
+      $alias = $select->innerJoin($d['table'], 'er', '%alias.entity_id = e.' . $entity_key_id);
       $select->condition("{$alias}.{$d['column']}", $entity->{$entity_key_id});
-      if ($settings['count_only_published']) {
-        $select->condition('n.status', 1);
+      if ($entity_type == 'node' && $settings['count_only_published']) {
+        $select->condition('e.status', NODE_PUBLISHED);
+      }
+      if (!empty($settings['allowed_bundles'])) {
+        $query->condition('er.bundle', array_keys($settings['allowed_bundles']), 'IN');
       }
 
       $query->union($select, 'UNION ALL');
@@ -282,35 +429,12 @@ function entityreference_count_entity_update($entity, $entity_type) {
  * The cached array can then be processed via hook_exit() after the
  * database updates are done so that we get a correct count.
  *
- * @see entityreference_count_references_update().
- * @see entityreference_count_delayed_entity_ids().
- * @see entityreference_count_exit().
+ * @see entityreference_count_references_update()
+ * @see entityreference_count_delayed_entity_ids()
+ * @see entityreference_count_exit()
  */
 function entityreference_count_entity_delete($entity, $entity_type) {
   entityreference_count_references_update($entity_type, $entity, TRUE);
-}
-
-/**
- * Get an array of entity reference fields for a particular entity bundle.
- *
- * @param $entity_type
- *   The entity type
- * @param $bundle
- *   The content type for which we want a list of entity reference fields.
- * @return
- *   An array of fields.
- */
-function entityreference_count_get_entityreference_fields($entity_type, $bundle) {
-  $entityreference_fields = array();
-  $fields = field_info_fields();
-
-  foreach ($fields as $field) {
-    if ($field['type'] == 'entityreference' && isset($field['bundles'][$entity_type]) && in_array($bundle, $field['bundles'][$entity_type])) {
-      $entityreference_fields[$field['field_name']] = $field;
-    }
-  }
-
-  return $entityreference_fields;
 }
 
 /**
@@ -325,14 +449,17 @@ function entityreference_count_get_entityreference_fields($entity_type, $bundle)
  */
 function entityreference_count_get_counted_entityreference_fields($entity_type, $entity_references) {
   $counted_fields = array();
-  $bundles = field_info_instances($entity_type);
 
-  foreach ($bundles as $bundle) {
-    foreach ($bundle as $instance) {
-      if (isset($instance['settings']['counted_reference_fields'])) {
-        foreach ($entity_references as $entity_reference) {
-          if (in_array($entity_reference['field_name'], $instance['settings']['counted_reference_fields'], TRUE)) {
-            $counted_fields[$entity_reference['field_name']] = $entity_reference['settings']['target_type'];
+  foreach (field_read_fields(array('type' => 'entityreference_count')) as $field_name => $field_info) {
+    $full_field = field_info_field($field_name);
+    foreach ($full_field['bundles'] as $type => $bundles) {
+      foreach ($bundles as $bundle) {
+        $instance = field_info_instance($type, $field_name, $bundle);
+        if (isset($instance['settings']['counted_reference_fields'])) {
+          foreach ($entity_references as $entity_reference) {
+            if (in_array($entity_reference['field_name'], $instance['settings']['counted_reference_fields'], TRUE)) {
+              $counted_fields[$entity_reference['field_name']] = $entity_reference['settings']['target_type'];
+            }
           }
         }
       }
@@ -369,9 +496,11 @@ function entityreference_count_get_referenced_ids($entity, $counted_fields) {
     if (isset($entity->original)) {
       $original_entityreferences = $entity->original->$counted_field;
 
-      foreach ($original_entityreferences as $language => $deltas) {
-        foreach ($deltas as $delta => $entityreference) {
-          $target_ids[$entityreference['target_id']] = $target_type;
+      if (!empty($original_entityreferences)) {
+        foreach ($original_entityreferences as $language => $deltas) {
+          foreach ($deltas as $delta => $entityreference) {
+            $target_ids[$entityreference['target_id']] = $target_type;
+          }
         }
       }
     }
@@ -397,7 +526,7 @@ function entityreference_count_references_update($entity_type, $entity, $delay =
   }
 
   // Get all the entity reference fields for this content type.
-  $entityreference_fields = entityreference_count_get_entityreference_fields($entity_type, $entity->type);
+  $entityreference_fields = field_read_fields(array('type' => 'entityreference', 'entity_type' => $entity_type, 'bundle' => $entity->type));
 
   // If there are no entity references for this content type then there is nothing to count.
   if (empty($entityreference_fields)) {
@@ -441,6 +570,20 @@ function entityreference_count_update_count($entity_type, $entity_id) {
   if (isset($entity[$entity_id])) {
     field_attach_presave($entity_type, $entity[$entity_id]);
     field_attach_update($entity_type, $entity[$entity_id]);
+
+    // Clear the cache for this entity.
+    entity_get_controller($entity_type)->resetCache(array($entity_id));
+
+    module_invoke_all('entityreference_count_updated', $entity_type, $entity[$entity_id]);
+  }
+}
+
+/**
+ * Implements hook entityreference_count_updated.
+ */
+function entityreference_count_entityreference_count_updated($entity_type, $entity) {
+  if (module_exists('rules')) {
+    rules_invoke_event('entityreference_count_updated', entity_metadata_wrapper($entity_type, $entity));
   }
 }
 
@@ -472,5 +615,15 @@ function entityreference_count_exit() {
     foreach ($entity_ids as $entity_id => $entity_type) {
       entityreference_count_update_count($entity_type, $entity_id);
     }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function entityreference_count_form_field_ui_field_edit_form_alter(&$form, &$form_state, $form_id) {
+  if ($form['#field']['type'] == 'entityreference_count') {
+    $form['field']['cardinality']['#options'] = array(1);
+    $form['field']['cardinality']['#disabled'] = TRUE;
   }
 }

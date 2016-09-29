@@ -33,6 +33,11 @@ Installation
   in order to update the count that will be empty for all the entities that
   exist previous the installation.
 
+- Note: The module only works with entityreference fields which use the "Simple
+  (with optional filter by bundle)" mode, the "Views: filter by an entity
+  reference view" mode will not work.
+
+
 Credits
 -------
 
